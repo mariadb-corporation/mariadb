@@ -3,8 +3,6 @@ dist: trusty
 language: bash
 services: docker
 env:
-  - VERSION=10.3
-  - VERSION=10.2
   - VERSION=10.1
 
 install:
