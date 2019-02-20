@@ -13,7 +13,7 @@ The data is generated to illustrate the capabilities of  **MariaDB AX**  and **M
 ```bash
 docker-compose up --build
 ```
-Navigate to [http://localhost:8080/](http://localhost:8080/?server=server&username=sandbox&db=bookstore)
+Navigate to [http://127.0.0.1:8080/](http://127.0.0.1:8080/?server=server&username=sandbox&db=bookstore)
 
 Fill username
 ```sandbox```

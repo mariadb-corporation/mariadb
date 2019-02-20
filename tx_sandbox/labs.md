@@ -109,7 +109,7 @@ This was easy question 5000.
 SELECT customer_nm,age FROM bookstore.Customers ORDER BY age LIMIT 1;
 ```
 
-The result should be somthing like this:
+The result should be something like this:
 
 ```
 +---------------+-----+
