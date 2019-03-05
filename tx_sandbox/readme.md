@@ -13,12 +13,18 @@ The data is generated to illustrate the capabilities of  **MariaDB AX**  and **M
 ```bash
 docker-compose up --build
 ```
-Navigate to [[http://localhost:8080/?server=server&username=sandbox&db=bookstore]]
+Navigate to [http://127.0.0.1:8080/](http://127.0.0.1:8080/?server=server&username=sandbox&db=bookstore)
 
-Default password is:
+Fill username
+```sandbox```
+
+Fill DB name:
+```bookstore```
+
+Password is:
 ```highlyillogical```
 
-Alterntively you can access the database from commandline:
+Alternatively you can access the database from commandline:
 ```sh
 mysql -h127.0.0.1 -usandbox -phighlyillogical -D bookstore
 ```

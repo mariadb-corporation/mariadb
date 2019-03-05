@@ -109,7 +109,7 @@ This was easy question 5000.
 SELECT customer_nm,age FROM bookstore.Customers ORDER BY age LIMIT 1;
 ```
 
-The result should be somthing like this:
+The result should be something like this:
 
 ```
 +---------------+-----+
@@ -568,11 +568,11 @@ As you might noticed we have not **JOIN** the MaritalStatus untill now. This is 
 | Widow         |    13021 |
 +---------------+----------+
 ```
-As you can see the Customers are almoust evenly distributed between single and married.
+As you can see the Customers are almost evenly distributed between single and married.
 
-This conclude our demographics analis.
+This conclude our demographics analisis.
 
-Lets add customer behaveour to the picture we want to know more about their bying habbits.
+Lets add customer behaveour to the picture we want to know more about their buying habits.
 How much they buy?
 How much they spend?
 What do they buy?
