@@ -80,7 +80,6 @@ RUN set -ex; \
 
 # bashbrew-architectures: amd64 arm64v8 ppc64le
 ENV MARIADB_MAJOR 10.4
-#ENV MARIADB_VERSION 1:10.3.10+maria~bionic
 
 RUN set -e;\
 	echo "deb http://downloads.mariadb.com/MariaDB/mariadb-$MARIADB_MAJOR/repo/ubuntu bionic main" > /etc/apt/sources.list.d/mariadb.list; \
