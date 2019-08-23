@@ -121,8 +121,12 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		fi
 
 		if [ ! -z "$MARIADB_RANDOM_ROOT_PASSWORD" ]; then
-			export MARIADB_ROOT_PASSWORD="$(pwgen -1 32)"
-			echo "GENERATED ROOT PASSWORD: $MARIADB_ROOT_PASSWORD"
+            # we have to filter characters like ' and \ that will terminate the sql query or don't count
+            # as special characters to keep the enterprise server password policy in mind.
+            MARIADB_ROOT_PASSWORD="'"
+            while [[ $MARIADB_ROOT_PASSWORD == *"'"* ]] || [[ $MARIADB_ROOT_PASSWORD == *"\\"* ]]; do
+			    export MARIADB_ROOT_PASSWORD="$(pwgen -1 32 -y)"
+            done
 		fi
 
 
