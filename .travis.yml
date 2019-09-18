@@ -24,7 +24,7 @@ script:
       ~/mariadb-docker-images/test/run.sh "$image"
       docker run -p 5432:5432 -d --name db arminc/clair-db:latest
       docker run -p 6060:6060 --link db:postgres -d --name clair arminc/clair-local-scan:v2.0.1
-      docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name clair-scanner ianmaguire/clair-scanner:latest tail -f /dev/null
+      docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name clair-scanner mariadb/clair-scanner:latest tail -f /dev/null
       clair_ip=`docker exec -it clair hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
       scanner_ip=`docker exec -it clair-scanner hostname -i | grep -oE '[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+'`
       echo "clair_ip = $clair_ip"
