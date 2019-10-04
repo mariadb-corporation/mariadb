@@ -6,6 +6,7 @@ env:
   - VERSION=10.3
   - VERSION=10.2
   - VERSION=10.1
+  - VERSION=10.4
 
 install:
   - git clone https://github.com/mariadb-corporation/mariadb-docker-images ~/mariadb-docker-images

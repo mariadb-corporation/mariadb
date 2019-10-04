@@ -18,7 +18,7 @@ declare -A dpkgArchToBashbrew=(
 )
 
 getRemoteVersion() {
-	local version="$1"; shift # 10.3
+	local version="$1"; shift # 10.4
 	local suite="$1"; shift # bionic
 	local dpkgArch="$1" shift # arm64
 
