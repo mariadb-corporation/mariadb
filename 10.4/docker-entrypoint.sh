@@ -125,14 +125,9 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
             # as special characters to keep the enterprise server password policy in mind.
             MARIADB_ROOT_PASSWORD="'"
             while [[ $MARIADB_ROOT_PASSWORD == *"'"* ]] || [[ $MARIADB_ROOT_PASSWORD == *"\\"* ]]; do
-<<<<<<< HEAD:10.3/docker-entrypoint.sh
-                export MARIADB_ROOT_PASSWORD="$(pwgen -1 32 -y)"
-            done
-=======
 			    export MARIADB_ROOT_PASSWORD="$(pwgen -1 32 -y)"
             done
 			echo "GENERATED ROOT PASSWORD: $MARIADB_ROOT_PASSWORD"
->>>>>>> origin/10.4:10.4/docker-entrypoint.sh
 		fi
 
 
