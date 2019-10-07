@@ -59,7 +59,7 @@ _check_config() {
 # latter only show values present in config files, and not server defaults
 _get_config() {
 	local conf="$1"; shift
-	"$@" --verbose --help --log-bin-index="$(mktemp -u)" 2>/dev/null | awk '$1 == "'"$conf"'" { print $2; exit }'
+	"$@" --verbose --help --log-bin-index="$(mktemp -u)" 2>/dev/null | grep "^$conf " | awk '{ print $2 }'
 }
 
 # allow the container to be started with `--user`
@@ -94,14 +94,14 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 
 		echo 'Initializing database'
 		# "Other options are passed to mysqld." (so we pass all "mysqld" arguments directly here)
-		mysql_install_db --datadir="$DATADIR" --rpm "${@:2}"
+		mysql_install_db --auth-root-socket-user=mysql --datadir="$DATADIR" --rpm "${@:2}"
 		echo 'Database initialized'
 
 		SOCKET="$(_get_config 'socket' "$@")"
 		"$@" --skip-networking --socket="${SOCKET}" &
 		pid="$!"
 
-		mysql=( mysql --protocol=socket -uroot -hlocalhost --socket="${SOCKET}" )
+		mysql=( mysql --protocol=socket -umysql -hlocalhost --socket="${SOCKET}" )
 
 		for i in {30..0}; do
 			if echo 'SELECT 1' | "${mysql[@]}" &> /dev/null; then
@@ -147,10 +147,10 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 
 		"${mysql[@]}" <<-EOSQL
 			-- What's done in this file shouldn't be replicated
-			--  or products like mysql-fabric won't work
+			-- or products like mysql-fabric won't work
 			SET @@SESSION.SQL_LOG_BIN=0;
 
-			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root') OR host NOT IN ('localhost') ;
+			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root', 'mysql') OR host NOT IN ('localhost') ;
 			SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MARIADB_ROOT_PASSWORD}') ;
 			GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
 			${rootCreate}
