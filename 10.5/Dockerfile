@@ -18,7 +18,7 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 # add gosu for easy step-down from root
-ENV GOSU_VERSION 1.10
+ENV GOSU_VERSION 1.12
 RUN set -ex; \
 	\
 	fetchDeps=' \

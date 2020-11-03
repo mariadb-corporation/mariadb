@@ -6,7 +6,7 @@ This is the Git repo of docker images for MariaDB Server, [mariadb-server-docker
 
 ---
 
-- [Travis CI:  
+- [Travis CI:
 ![build status badge](https://img.shields.io/travis/mariadb-corporation/mariadb-server-docker/master.svg)](https://travis-ci.org/mariadb-corporation/mariadb-server-docker/branches)
 
 ---
@@ -18,13 +18,13 @@ Include the the version number as a docker tag.
 To pull MariaDB Server version 10.4 run the following command:
 
 ```bash
-docker pull mariadb/server:10.4
+docker pull mariadb/server:10.5
 ```
 
-To run MariaDB Server version 10.4 run the following command:
+To run MariaDB Server version 10.5 run the following command:
 
 ```bash
-docker run -d --name maria -eMARIADB_ROOT_PASSWORD=mypassword mariadb/server:10.4
+docker run -d --name maria -eMARIADB_ROOT_PASSWORD=mypassword mariadb/server:10.5
 ```
 
 ### Configuration
