@@ -79,7 +79,7 @@ RUN set -ex; \
 	apt-key list
 
 # bashbrew-architectures: amd64 arm64v8 ppc64le
-ENV MARIADB_MAJOR 10.4
+ENV MARIADB_MAJOR 10.5
 
 RUN set -e;\
 	echo "deb http://downloads.mariadb.com/MariaDB/mariadb-$MARIADB_MAJOR/repo/ubuntu bionic main" > /etc/apt/sources.list.d/mariadb.list; \
@@ -107,7 +107,7 @@ RUN set -ex; \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 # comment out any "user" entires in the MySQL config ("docker-entrypoint.sh" or "--user" will handle user switching)
-	sed -ri 's/^user\s/#&/' /etc/mysql/my.cnf /etc/mysql/conf.d/*; \
+	sed -ri 's/^user\s/#&/' /etc/mysql/mariadb.cnf /etc/mysql/mariadb.conf.d/*.cnf; \
 # purge and re-create /var/lib/mysql with appropriate ownership
 	rm -rf /var/lib/mysql; \
 	mkdir -p /var/lib/mysql /var/run/mysqld; \
@@ -119,7 +119,7 @@ RUN set -ex; \
 		| xargs -0 grep -lZE '^(bind-address|log)' \
 		| xargs -rt -0 sed -Ei 's/^(bind-address|log)/#&/'; \
 # don't reverse lookup hostnames, they are usually another container
-	echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+	echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/mariadb.conf.d/docker.cnf
 
 VOLUME /var/lib/mysql
 
