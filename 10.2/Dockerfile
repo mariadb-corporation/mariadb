@@ -104,7 +104,7 @@ RUN set -ex; \
 	apt-get install -y \
 		"mariadb-server" \
 		$backupPackage \
-		socat \
+		socat libjemalloc1 \
 	; \
 	rm -rf /var/lib/apt/lists/*; \
 # comment out any "user" entires in the MySQL config ("docker-entrypoint.sh" or "--user" will handle user switching)
