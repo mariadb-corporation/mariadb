@@ -2,6 +2,8 @@
 set -eo pipefail
 shopt -s nullglob
 
+JEMALLOC=${JEMALLOC:-0}
+
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"
@@ -206,4 +208,10 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	fi
 fi
 
+# Jemalloc
+JEMALLOC_LIB=$(find /usr/lib -type f -name 'libjemalloc.so.1')
+if [[ -n "${JEMALLOC_LIB}" ]] && [[ ${JEMALLOC} -ne 0 ]]; then
+	export LD_PRELOAD=${JEMALLOC_LIB}
+fi
+#
 exec "$@"
