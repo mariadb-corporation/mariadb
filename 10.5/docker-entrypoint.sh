@@ -2,6 +2,8 @@
 set -eo pipefail
 shopt -s nullglob
 
+JEMALLOC=${JEMALLOC:-0}
+
 # if command starts with an option, prepend mysqld
 if [ "${1:0:1}" = '-' ]; then
 	set -- mysqld "$@"
@@ -150,7 +152,7 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 			-- or products like mysql-fabric won't work
 			SET @@SESSION.SQL_LOG_BIN=0;
 
-			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mysqlxsys', 'root', 'mysql') OR host NOT IN ('localhost') ;
+			DELETE FROM mysql.user WHERE user NOT IN ('mysql.sys', 'mariadb.sys', 'mysqlxsys', 'root', 'mysql') OR host NOT IN ('localhost') ;
 			SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${MARIADB_ROOT_PASSWORD}') ;
 			GRANT ALL ON *.* TO 'root'@'localhost' WITH GRANT OPTION ;
 			${rootCreate}
@@ -206,4 +208,10 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 	fi
 fi
 
+# Jemalloc
+JEMALLOC_LIB=$(find /usr/lib -type f -name 'libjemalloc.so.1')
+if [[ -n "${JEMALLOC_LIB}" ]] && [[ ${JEMALLOC} -ne 0 ]]; then
+	export LD_PRELOAD=${JEMALLOC_LIB}
+fi
+#
 exec "$@"
