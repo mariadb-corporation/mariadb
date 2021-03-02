@@ -82,7 +82,7 @@ RUN set -ex; \
 ENV MARIADB_MAJOR 10.4
 
 RUN set -e;\
-	echo "deb http://downloads.mariadb.com/MariaDB/mariadb-$MARIADB_MAJOR/repo/ubuntu bionic main" > /etc/apt/sources.list.d/mariadb.list; \
+	echo "deb https://downloads.mariadb.com/MariaDB/mariadb-$MARIADB_MAJOR/repo/ubuntu bionic main" > /etc/apt/sources.list.d/mariadb.list; \
 	{ \
 		echo 'Package: *'; \
 		echo 'Pin: release o=MariaDB'; \
