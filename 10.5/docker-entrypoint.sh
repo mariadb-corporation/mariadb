@@ -206,6 +206,7 @@ if [ "$1" = 'mysqld' -a -z "$wantHelp" ]; then
 		echo 'MySQL init process done. Ready for start up.'
 		echo
 	fi
+	echo 'This image is deprecated and will be replaced by https://hub.docker.com/_/mariadb in the future.' >&2
 fi
 
 # Jemalloc
