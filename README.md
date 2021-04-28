@@ -1,3 +1,9 @@
+## Deprecated
+
+This image is deprecated and the focus of development will be on the [Docker Library Official Image](https://hub.docker.com/_/mariadb) (source: [mariadb-docker](https://github.com/MariaDB/mariadb-docker)).
+
+Please report any blocking incompatibilities that affect your transition on [JIRA](https://jira.mariadb.org/).
+
 ## Maintained by: [MariaDB](https://mariadb.com/)
 
 This is the Git repo of docker images for MariaDB Server, [mariadb-server-docker](https://github.com/mariadb-corporation/mariadb-server-docker)
